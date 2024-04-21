@@ -1,0 +1,13 @@
+com.example.sorcier
+com.example.sorcier.bll
+com.example.sorcier.bll.metier
+com.example.sorcier.bll.mock
+com.example.sorcier.bll.sqlserver
+com.example.sorcier.bo
+com.example.sorcier.config
+com.example.sorcier.dal
+com.example.sorcier.dal.mock
+com.example.sorcier.dal.rowmapper
+com.example.sorcier.dal.sqlserver
+com.example.sorcier.ihm.controller
+com.example.sorcier.ihm.converter

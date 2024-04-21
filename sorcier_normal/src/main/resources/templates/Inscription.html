@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head data-th-replace="~{head :: head(titre='Liste de maisons')}">
+</head>
+<body>
+	<header data-th-replace="~{header :: header()}"></header>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card mt-5">
+					<div class="card-body">
+						<h2 class="card-title text-center">Inscription</h2>
+						<form id="ajouterSorcierForm" action="/inscription/lancer"
+							method="post" data-th-object="${utilisateurACreer}">
+							<input type="hidden" data-th-name="${_csrf.parameterName}"
+								data-th-value="${_csrf.token}">
+							<div class="form-group">
+								<label for="email">Email</label> <input type="email"
+									class="form-control" id="email" name="email" required
+									data-th-field="*{email}">
+							</div>
+							<div class="form-group">
+								<label for="username">Nom d'utilisateur (2-35 lettres)</label> <input
+									type="text" class="form-control" id="username" name="username"
+									required data-th-field="*{nom}">
+							</div>
+							<div class="form-group">
+								<label for="roleADonne">Rôle</label> <select
+									class="form-control" id="roleADonne" name="roleADonne">
+									<option value="INSCRIT">INSCRIT</option>
+									<option value="ADMIN">ADMIN</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="mdp">Mot de passe</label> <input type="password"
+									class="form-control" id="mdp" name="mdp" required
+									data-th-field="*{motDePasse.mdp}">
+							</div>
+							<div class="form-group">
+								<label for="confirmeMdp">Confirmer le mot de passe</label> <input
+									type="password" class="form-control" id="confirmeMdp"
+									name="confirmeMdp" required
+									data-th-field="*{motDePasse.confirme}">
+							</div>
+							<div class="d-grid">
+								<button type="submit" class="btn btn-primary">S'inscrire</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

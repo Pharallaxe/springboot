@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head data-th-replace="~{head :: head(titre='Liste de sorciers')}">
+</head>
+<body>
+	<header data-th-replace="~{header :: header()}"></header>
+	<div class="container mt-5">
+		<h1>Modifier sorcier</h1>
+		<!-- Formulaire pour modifier un sorcier -->
+		<form id="modifierSorcierForm" method="post"
+			action="/sorciers/modifier">
+			<input type="hidden" name="id"
+				data-th-value="*{sorcierADetailler.id}" />
+			<div class="form-group">
+				<label for="nom">Nom</label> <input type="text" class="form-control"
+					id="nom" name="nom" data-th-value="*{sorcierADetailler.nom}" th:attr="readonly=${sorcierADetailler.modifiable} ? null : 'readonly'">
+			</div>
+			<div class="form-group">
+				<label for="prenom">Prénom</label> <input type="text"
+					class="form-control" id="prenom" name="prenom"
+					data-th-value="*{sorcierADetailler.prenom}" th:attr="readonly=${sorcierADetailler.modifiable} ? null : 'readonly'">
+			</div>
+			<div class="form-group">
+				<label for="maison">Maison</label> <select class="form-control"
+					id="maison" name="maison" th:attr="disabled=${sorcierADetailler.modifiable} ? null : 'disabled'">
+					<option th:each="maison : ${maisonsALister}"
+						th:value="${maison.id}" th:text="${maison.nom}"
+						th:selected="${maison.id == sorcierADetailler.maison.id}"></option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="attaque">Attaque (2-18)</label> <input type="number" class="form-control"
+					id="attaque" name="attaque" data-th-value="*{sorcierADetailler.attaque}" th:attr="readonly=${sorcierADetailler.modifiable} ? null : 'readonly'">
+			</div>
+			<div class="form-group">
+				<label for="sante">Defense (40-300)</label> <input type="number" class="form-control"
+					id="sante" name="sante" data-th-value="*{sorcierADetailler.sante}" th:attr="readonly=${sorcierADetailler.modifiable} ? null : 'readonly'">
+			</div>
+			<div class="d-flex justify-content-end">
+				<button th:if="${sorcierADetailler.modifiable}" type="submit" class="btn btn-primary mr-2">Modifier</button>
+				<a class="btn btn-secondary mr-2" href="/sorciers/lister">Fermer</a>
+			</div>
+		</form>
+</body>
+</html>

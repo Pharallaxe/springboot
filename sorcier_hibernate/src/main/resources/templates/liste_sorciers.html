@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head data-th-replace="~{head :: head(titre='Liste de sorciers')}">
+</head>
+<body>
+	<header data-th-replace="~{header :: header()}"></header>
+	<div class="container mt-5">
+		<h1>Liste des sorciers</h1>
+		<div class="row mb-3">
+			<div class="col">
+				<form class="form-inline" action="/sorciers/rechercher"
+					method="post">
+					<div class="form-group mr-2">
+						<input type="text" class="form-control" id="maisonInput"
+							name="motARechercher" list="maisonsList" placeholder="Rechercher">
+						<datalist id="maisonsList">
+							<option data-th-each="maison : ${maisonsALister}"
+								data-th-text="${maison.nom}" th:text="${maison.nom}"></option>
+						</datalist>
+					</div>
+					<button type="submit" class="btn btn-primary mr-2">Rechercher</button>
+					<a class="btn btn-secondary" data-th-href="@{/sorciers/lister}">Réinitialiser</a>
+				</form>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-hover">
+				<thead class="thead-dark">
+					<tr>
+						<th class="text-center" scope="col">Prénom</th>
+						<th class="text-center" scope="col">Nom</th>
+						<th class="text-center" scope="col">Maison</th>
+						<th class="text-center" scope="col">Attaque</th>
+						<th class="text-center" scope="col">Sante</th>
+						<th class="text-center" scope="col">Détails</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-th-each="sorcier : ${sorciersALister}">
+						<td class="text-center" th:text="${sorcier.prenom}"></td>
+						<td class="text-center" th:text="${sorcier.nom}"></td>
+						<td class="text-center" th:text="${sorcier.maison.nom}"></td>
+						<td class="text-center" th:text="${sorcier.attaque}"></td>
+						<td class="text-center" th:text="${sorcier.sante}"></td>
+						<td class="d-flex justify-content-center"><a
+							class="btn btn-success"
+							data-th-href="@{/sorciers/detailler(id=${sorcier.id})}">Détails</a>
+							<a th:if="${sorcier.modifiable}" class="btn btn-danger ml-2"
+							data-th-href="@{/sorciers/supprimer(id=${sorcier.id})}">Supprimer</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row mb-3">
+			<div class="col">
+				<button type="button" class="btn btn-success mr-2"
+					data-toggle="modal" data-target="#ajouterSorcierModal">Ajouter
+				</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal pour ajouter un sorcier -->
+	<div class="modal fade" id="ajouterSorcierModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Ajouter un sorcier</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<!-- Formulaire pour ajouter un sorcier -->
+					<form id="ajouterSorcierForm" action="/sorciers/creer"
+						method="post" data-th-object="${sorcierACreer}">
+
+						<div class="form-group">
+							<label for="nom">Nom</label> <input type="text"
+								class="form-control" id="nom" name="nom" data-th-field="*{nom}">
+						</div>
+						<div class="form-group">
+							<label for="prenom">Prénom</label> <input type="text"
+								class="form-control" id="prenom" name="prenom"
+								data-th-field="*{prenom}">
+						</div>
+						<div class="form-group">
+							<label for="maison">Maison</label> <select class="form-control"
+								id="idType" name="maison" data-th-field="*{maison}">
+								<option data-th-each="maison : ${maisonsALister}"
+									data-th-text="${maison.nom}" data-th-value=${maison.id}>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="attaque">Attaque (2-18)</label> <input type="number"
+								class="form-control" id="attaque" name="attaque"
+								data-th-field="*{attaque}">
+						</div>
+						<div class="form-group">
+							<label for="sante">Santé (40-300)</label> <input type="number"
+								class="form-control" id="sante" name="sante"
+								data-th-field="*{sante}">
+						</div>
+						<div class="d-flex justify-content-end">
+							<button type="submit" class="btn btn-primary mr-2">
+								Ajouter</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Fermer</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

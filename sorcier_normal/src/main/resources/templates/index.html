@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head data-th-replace="~{head :: head(titre='Accueil')}">
+</head>
+<body>
+	<header data-th-replace="~{header :: header()}"></header>
+	<h1 class="text-center mt-5">Bienvenue à Poudlard</h1>
+	<main class="container">
+		<section id="hero" class="text-center py-5">
+			<h2 class="mb-4">Decouvrez le monde magique de Poudlard</h2>
+			<p class="lead mb-4">Bienvenue sur Poudlard Wizardry,
+				l'application qui vous permet de creer vos propres sorciers et
+				maisons, et d'explorer l'univers enchante de Poudlard.</p>
+			<a href="/connexion" class="btn btn-primary">Connectez-vous</a>
+		</section>
+		<section id="features" class="py-5">
+			<h2 class="text-center mb-4">Fonctionnalites Principales</h2>
+			<div class="row justify-content-center">
+				<div class="col-md-4 mb-4 d-flex justify-content-center">
+					<div class="card h-100 flex-column">
+						<div class="card-body align-items-center d-flex flex-column">
+							<h3 class="card-title">Les Sorciers</h3>
+							<p class="card-text text-justify">Créer, modifier ou supprimer des
+								sorciers, choisir le nom, le prénom et les caractéristiques.
+								Puis sélectionner le sorcier.</p>
+							<a href="/sorciers/lister" class="btn btn-primary mt-auto">On
+								y va</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4 d-flex justify-content-center">
+					<div class="card h-100 flex-column">
+						<div class="card-body align-items-center d-flex flex-column">
+							<h3 class="card-title">Les Maisons</h3>
+							<p class="card-text text-justify">Inventer des maisons, en choisissant le
+								nom, le bonus d'attaque et le bonus de santé.</p>
+							<a href="/maisons/lister" class="btn btn-primary mt-auto">C'est parti</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+	</main>
+	<footer class="text-center py-4">
+		<p>&copy; 2024 Poudlard Wizardry. Tous droits reserves.</p>
+	</footer>
+	</div>
+</body>
+</html>

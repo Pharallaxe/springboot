@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head data-th-replace="~{head :: head(titre='Liste de maisons')}">
+</head>
+<body>
+	<header data-th-replace="~{header :: header()}"></header>
+	<div class="container mt-5">
+		<h1>Modifier maison</h1>
+		<!-- Formulaire pour modifier un maison -->
+		<form id="modifierMaisonForm" method="post"
+			action="/maisons/modifier">
+			<input type="hidden" name="id" data-th-value="*{maisonsADetailler.id}" />
+
+			<div class="form-group">
+				<label for="nom">Nom</label> <input type="text" class="form-control"
+					id="nom" name="nom" data-th-value="*{maisonsADetailler.nom}" th:attr="readonly=${maisonsADetailler.modifiable} ? null : 'readonly'">
+			</div>
+			<div class="form-group">
+				<label for="bonus_attaque">Bonus d'attaque (0-8)</label> <input type="number" class="form-control"
+					id="bonus_attaque" name="bonus_attaque" data-th-value="*{maisonsADetailler.bonus_attaque}" th:attr="readonly=${maisonsADetailler.modifiable} ? null : 'readonly'">
+			</div>
+			<div class="form-group">
+				<label for="bonus_sante">Bonus de santé (0-30)</label> <input type="number" class="form-control"
+					id="bonus_sante" name="bonus_sante" data-th-value="*{maisonsADetailler.bonus_sante}" th:attr="readonly=${maisonsADetailler.modifiable} ? null : 'readonly'">
+			</div>
+			<div class="d-flex justify-content-end">
+				<button th:if="${maisonsADetailler.modifiable}" type="submit" class="btn btn-primary mr-2">Modifier</button>
+				
+				<a class="btn btn-secondary mr-2"
+					href="/maisons/lister">Fermer</a>
+			</div>
+		</form>
+</body>
+</html>

@@ -1,0 +1,59 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.4'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example.sorcier'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// Ajoute les fonctionnalités web de Spring Boot.
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	
+	// Ajoute Thymeleaf pour la gestion des templates HTML.
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	
+	// Ajoute le support de sécurité avec Spring Boot.
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
+	// Ajoute les fonctions de validation avec Spring Boot.
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
+	// Ajoute le support JPA pour l'accès aux données.
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+	// Ajoute des extensions Thymeleaf pour l'intégration de la sécurité Spring.
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	
+	// Ajoute le driver JDBC pour SQLite.
+	implementation 'org.xerial:sqlite-jdbc:3.34.0'
+	
+	// Ajoute des dialectes Hibernate pour communautés, ici pour SQLite.
+	implementation group: 'org.hibernate.orm', name: 'hibernate-community-dialects', version: '6.5.0.CR1'
+	
+	// Ajoute des outils de développement de Spring Boot, utilisés uniquement en développement.
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	
+	// Ajoute le driver JDBC pour SQL Server, uniquement nécessaire à l'exécution.
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	
+	// Ajoute des outils de test pour les fonctionnalités de Spring Boot.
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// Ajoute des outils de test pour les fonctionnalités de sécurité de Spring.
+	testImplementation 'org.springframework.security:spring-security-test'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
