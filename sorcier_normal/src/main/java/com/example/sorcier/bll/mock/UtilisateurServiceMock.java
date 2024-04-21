@@ -6,6 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,8 +110,26 @@ public class UtilisateurServiceMock implements UtilisateurService {
 		// Met à jour le mot de passe de l'utilisateur.
 		mettreAJourMdp(utilisateur);
 		
+		
 		// Met à jour l'utilisateur dans le mock du repository utilisateur.
 		utilisateurRepositoryMock.update(utilisateur);
+		
+		// Charge l'utilisateur existant à partir de Spring Security.
+		UserDetails existingUser = userDetailsManager.loadUserByUsername(utilisateur.getNom());
+
+		if (existingUser != null) {
+		    // Construit un nouvel objet UserDetails avec le nouveau mot de passe tout en conservant les autres informations inchangées.
+		    User.UserBuilder userBuilder = User.builder()
+		        .username(existingUser.getUsername())  // Conserve le nom d'utilisateur existant
+		        .password(utilisateur.getMdpHash())  // Met à jour le mot de passe
+		        .authorities(existingUser.getAuthorities());  // Conserve les mêmes autorités/roles
+
+		    // Met à jour l'utilisateur dans Spring Security.
+		    userDetailsManager.updateUser(userBuilder.build());
+		} else {
+		    // L'utilisateur n'existe pas. Vous pouvez gérer cette situation selon votre logique métier.
+		    throw new UsernameNotFoundException("Utilisateur non trouvé : " + utilisateur.getNom());
+		}
 	}
 
 	/**

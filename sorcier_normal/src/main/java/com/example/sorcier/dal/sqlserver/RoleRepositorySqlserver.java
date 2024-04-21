@@ -23,7 +23,14 @@ public class RoleRepositorySqlserver implements RoleRepository {
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     
-    /**
+    
+    
+    public RoleRepositorySqlserver(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+	}
+
+	/**
      * Enregistre un nouveau rôle associé à un utilisateur.
      *
      * @param id_utilisateur - L'ID de l'utilisateur auquel le rôle est assigné.

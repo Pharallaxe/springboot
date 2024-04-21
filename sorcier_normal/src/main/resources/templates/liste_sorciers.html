@@ -11,6 +11,8 @@
 				<form class="form-inline" action="/sorciers/rechercher"
 					method="post">
 					<div class="form-group mr-2">
+					<input type="hidden" data-th-name="${_csrf.parameterName}"
+						data-th-value="${_csrf.token}">
 						<input type="text" class="form-control" id="maisonInput"
 							name="motARechercher" list="maisonsList" placeholder="Rechercher">
 						<datalist id="maisonsList">
@@ -84,8 +86,9 @@
 						method="post" data-th-object="${sorcierACreer}">
 
 						<div class="form-group">
-							<label for="nom">Nom</label> <input type="text"
-								class="form-control" id="nom" name="nom"
+							<input type="hidden" data-th-name="${_csrf.parameterName}"
+								data-th-value="${_csrf.token}"> <label for="nom">Nom</label>
+							<input type="text" class="form-control" id="nom" name="nom"
 								placeholder="Nom de Sorcier" data-th-field="*{nom}">
 						</div>
 						<div class="form-group">
@@ -138,10 +141,11 @@
 						method="post" data-th-object="${sorcierACreer}">
 
 						<div class="form-group">
-							<input type="hidden" name="avecMaison" th:value="${true}" /> <label
-								for="nom">Nom</label> <input type="text" class="form-control"
-								id="nom" name="nom" placeholder="Nom de Sorcier"
-								data-th-field="*{nom}">
+							<input type="hidden" data-th-name="${_csrf.parameterName}"
+								data-th-value="${_csrf.token}"> <input type="hidden"
+								name="avecMaison" th:value="${true}" /> <label for="nom">Nom</label>
+							<input type="text" class="form-control" id="nom" name="nom"
+								placeholder="Nom de Sorcier" data-th-field="*{nom}">
 						</div>
 						<div class="form-group">
 							<label for="prenom">Prénom</label> <input type="text"
