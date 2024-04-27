@@ -54,7 +54,7 @@ public class ConnexionController {
 	 */
 	@GetMapping("/connexion")
 	public String afficherConnexion() {
-		return "/connexion";
+		return "connexion";
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class ConnexionController {
 	 */
 	@GetMapping("/deconnexion")
 	public String afficherDeconnexion() {
-		return "/";
+		return "index";
 	}
 	
 	/**
